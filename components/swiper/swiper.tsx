@@ -4,6 +4,8 @@ import Pager from "../pager/pager"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 import { Carousel } from "antd"
+import dynamic from "next/dynamic"
+const SwiperContent = dynamic(import("./swiper-content"), { ssr: false })
 
 const Swiper = (props) => {
 	function onChange(a: number): void {
@@ -15,6 +17,13 @@ const Swiper = (props) => {
 				<Carousel dotPosition="right" autoplay afterChange={onChange}>
 					<div>
 						<div>
+							<SwiperContent
+								imgs={[
+									"https://media.fengyanyu.com/1.png",
+									"https://media.fengyanyu.com/2.jpg",
+									"https://media.fengyanyu.com/3.jpg",
+								]}
+							></SwiperContent>
 							<h3>1</h3>
 						</div>
 					</div>
