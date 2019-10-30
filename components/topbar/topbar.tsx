@@ -8,13 +8,8 @@ import Container from "@material-ui/core/Container"
 import styled from "styled-components"
 import TopbarAction from "./topbar-action"
 
-interface Props {
-	children: React.ReactElement
-}
-
-function ElevationScroll(props: Props) {
-  const { children } = props
-  
+function ElevationScroll(props) {
+	const { children } = props
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 0,
@@ -29,7 +24,8 @@ const isSticky = {
 	sticky: { backgroundColor: "rgba(248,248,248,1)", color: "#333", transition: "all 0.3s" },
 }
 
-export default function ElevateAppBar(props: Props) {
+export default function ElevateAppBar(props) {
+	const { toggleDrawer } = props
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 0,
@@ -40,13 +36,14 @@ export default function ElevateAppBar(props: Props) {
 			<ElevationScroll {...props}>
 				<AppBar className="topbar__container" style={trigger ? isSticky.sticky : isSticky.stable}>
 					<Toolbar variant="dense" className="topbar__toolbar">
-						<TopbarAction></TopbarAction>
+						<TopbarAction toggleDrawer={toggleDrawer} drawer></TopbarAction>
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
 			<style jsx>{`
 				.topbar {
 					background: #f8f8f8;
+					width: 100vw;
 				}
 				.topbar__toolbar {
 					background: white;

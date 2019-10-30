@@ -8,6 +8,7 @@ import dynamic from "next/dynamic"
 const SwiperContent = dynamic(import("./swiper-content"), { ssr: false })
 
 const Swiper = (props) => {
+	const { size } = props
 	let defaultImgs = [
 		{
 			title: "",
@@ -34,13 +35,13 @@ const Swiper = (props) => {
 	}
 	return (
 		<div>
-			<SwiperContainer>
-				<Carousel dotPosition="right" autoplay afterChange={onChange}>
+			<SwiperContainer size={size}>
+				<Carousel className="swiperContent__wrapper" autoplay afterChange={onChange}>
 					{imgs.map((item, index) => {
 						return (
 							<div key={index + "1"}>
-								<div>
-									<SwiperContent imgs={item.imgs}></SwiperContent>
+								<div className="swiperContent__wrapper">
+									<SwiperContent height={size.height} imgs={item.imgs}></SwiperContent>
 								</div>
 							</div>
 						)
@@ -48,10 +49,6 @@ const Swiper = (props) => {
 				</Carousel>
 			</SwiperContainer>
 			<style global jsx>{`
-				Carousel {
-					width: 100%;
-					height: 100%;
-				}
 				.ant-carousel .slick-slide {
 					text-align: center;
 					height: 100%;
@@ -59,13 +56,13 @@ const Swiper = (props) => {
 					overflow: hidden;
 				}
 				.ant-carousel .slick-slide h3 {
-					color: #fff;
+					color: #f8f8f8;
 				}
 				.ant-carousel .slick-slide div {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					height: 100vh;
+					height: 100%;
 				}
 			`}</style>
 		</div>
@@ -74,12 +71,16 @@ const Swiper = (props) => {
 export default Swiper
 
 const SwiperContainer = styled.div`
-	width: 100%;
-	height: 100%;
+	width: ${(props) => props.size.width}vw;
+	height: ${(props) => props.size.height}vh;
 	main {
 		display: flex;
 		width: 100%;
 		height: 100%;
 		background: #33333370;
+	}
+	div {
+		width: 100%;
+		height: 100%;
 	}
 `

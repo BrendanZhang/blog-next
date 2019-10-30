@@ -1,30 +1,34 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { loadGetInitialProps } from "next/dist/next-server/lib/utils"
+import { TIMEOUT } from "dns"
+
+const viewHeight = document.body.getBoundingClientRect().height
 
 const SwiperContent = (props) => {
-	const [position, setPosition] = useState(window.scrollY)
-	const imgs = props.imgs
+	const [position, setPosition] = useState(window.scrollY / viewHeight)
+	const { imgs, height } = props
 	const throttle = (gapTime) => {
-		let last = 0
+		let timer = null
 		return () => {
-			let nowTime = Date.now()
-			if (nowTime - last > gapTime) {
-				setPosition(window.scrollY)
-				last = nowTime
+			if (timer) {
+				clearTimeout(timer)
+				timer = null
 			}
+			timer = setTimeout(() => {
+				setPosition(window.scrollY / viewHeight)
+				console.log(position)
+			}, gapTime)
 		}
 	}
-	window.addEventListener("scroll", () => {
-		setInterval(throttle(2000))
-	})
+	window.addEventListener("scroll", throttle(50))
 
 	return (
 		<div>
 			<ImgCanvas>
 				{imgs.map((img, index) => {
 					return (
-						<ImgWrapper key={index + "1"} index={index} position={-position * 0.2 * index}>
+						<ImgWrapper key={index + "1"} index={index} height={height} position={-position * 20}>
 							<img src={img}></img>
 						</ImgWrapper>
 					)
@@ -34,8 +38,6 @@ const SwiperContent = (props) => {
 	)
 }
 const ImgCanvas = styled.div`
-	width: 100vw;
-	height: 100%;
 	position: relative;
 	::before {
 		content: "";
@@ -51,16 +53,17 @@ const ImgCanvas = styled.div`
 const ImgWrapper = styled.div`
 	position: absolute;
 	transition: all 0.3s;
-	transform: translateY(${(props) => props.position}px);
+	transform: translateY(${(props) => ((20 * props.height) / 100 + props.position) * props.index}vh);
 	z-index: ${(props) => props.index - 1};
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: ${(props) => props.index * -10}px;
+	bottom: 0;
 	img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: center bottom;
 	}
 `
 

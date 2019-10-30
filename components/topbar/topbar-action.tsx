@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography"
 import { useState } from "react"
 
 const TopbarAction = (props) => {
+	const { toggleDrawer } = props
 	const [Links, setLinks] = useState(
 		[
 			{ href: "/", label: "HOME" },
@@ -21,7 +22,7 @@ const TopbarAction = (props) => {
 	return (
 		<CustomToolbar>
 			<div className="topbar__leftAction">
-				<IconButton edge="start" color="inherit" aria-label="menu">
+				<IconButton edge="start" onClick={toggleDrawer(true)} color="inherit" aria-label="menu">
 					<MenuIcon />
 				</IconButton>
 				<Typography variant="h6">Bren's Blog</Typography>

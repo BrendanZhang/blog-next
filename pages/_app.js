@@ -9,8 +9,6 @@ class MyApp extends App {
 		const { Component, pageProps, router } = this.props
 		return (
 			<Layout>
-				<div className="banner"></div>
-
 				<AnimatePresence exitBeforeEnter>
 					<Component {...pageProps} key={router.route} />
 				</AnimatePresence>

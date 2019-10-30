@@ -77,7 +77,6 @@ const Pager = (props) => {
 					justify-content: center;
 					align-items: center;
 					box-shadow: 0 0 20px 30px inset rgba(0, 0, 0, 0.3);
-					border-right: 0.3px solid #666;
 				}
 				li:last-child {
 					border: none;
