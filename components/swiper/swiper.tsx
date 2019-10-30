@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Head from "next/head"
 import Pager from "../pager/pager"
 import { useRouter } from "next/router"
@@ -8,40 +8,43 @@ import dynamic from "next/dynamic"
 const SwiperContent = dynamic(import("./swiper-content"), { ssr: false })
 
 const Swiper = (props) => {
-	function onChange(a: number): void {
+	let defaultImgs = [
+		{
+			title: "",
+			subTitle: "",
+			imgs: [
+				"https://media.fengyanyu.com/1.png",
+				"https://media.fengyanyu.com/2.jpg",
+				"https://media.fengyanyu.com/3.jpg",
+			],
+		},
+		{
+			title: "",
+			subTitle: "",
+			imgs: [
+				"https://media.fengyanyu.com/2.jpg",
+				"https://media.fengyanyu.com/3.jpg",
+				"https://media.fengyanyu.com/1.png",
+			],
+		},
+	]
+	let [imgs, setImgs] = useState(defaultImgs)
+	let onChange = (a) => {
 		console.log(a)
 	}
 	return (
 		<div>
 			<SwiperContainer>
 				<Carousel dotPosition="right" autoplay afterChange={onChange}>
-					<div>
-						<div>
-							<SwiperContent
-								imgs={[
-									"https://media.fengyanyu.com/1.png",
-									"https://media.fengyanyu.com/2.jpg",
-									"https://media.fengyanyu.com/3.jpg",
-								]}
-							></SwiperContent>
-							<h3>1</h3>
-						</div>
-					</div>
-					<div>
-						<div>
-							<h3>2</h3>
-						</div>
-					</div>
-					<div>
-						<div>
-							<h3>3</h3>
-						</div>
-					</div>
-					<div>
-						<div>
-							<h3>4</h3>
-						</div>
-					</div>
+					{imgs.map((item, index) => {
+						return (
+							<div key={index + "1"}>
+								<div>
+									<SwiperContent imgs={item.imgs}></SwiperContent>
+								</div>
+							</div>
+						)
+					})}
 				</Carousel>
 			</SwiperContainer>
 			<style global jsx>{`
@@ -53,7 +56,6 @@ const Swiper = (props) => {
 					text-align: center;
 					height: 100%;
 					width: 100%;
-					background: #364d79;
 					overflow: hidden;
 				}
 				.ant-carousel .slick-slide h3 {
