@@ -1,13 +1,33 @@
 import { useState } from "react"
 import styled from "styled-components"
-import { loadGetInitialProps } from "next/dist/next-server/lib/utils"
-import { TIMEOUT } from "dns"
+import Router from "next/router"
 
 const viewHeight = document.body.getBoundingClientRect().height
+const events = [
+	"routerChangeStart",
+	"routerChangeComplete",
+	"routerChangeError",
+	"beforeHistoryChange",
+	"hashChangeStart",
+	"hashChangeComplete",
+]
+function makeEvent(type) {
+	return (...args) => {
+		console.log(type, ...args)
+	}
+}
+
+events.forEach((event) => {
+	Router.events.on(event, makeEvent(event))
+})
 
 const SwiperContent = (props) => {
 	const [position, setPosition] = useState(window.scrollY / viewHeight)
 	const { imgs, height } = props
+	const routerChangeEvent = () => {
+		setPosition(1)
+	}
+	Router.events.on("beforeHistoryChange", routerChangeEvent)
 	const throttle = (gapTime) => {
 		let timer = null
 		return () => {
@@ -17,11 +37,10 @@ const SwiperContent = (props) => {
 			}
 			timer = setTimeout(() => {
 				setPosition(window.scrollY / viewHeight)
-				console.log(position)
 			}, gapTime)
 		}
 	}
-	window.addEventListener("scroll", throttle(50))
+	window.addEventListener("scroll", throttle(200))
 
 	return (
 		<div>

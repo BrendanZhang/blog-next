@@ -5,7 +5,8 @@ import { useRouter } from "next/router"
 import Router from "next/dist/next-server/server/router"
 import { motion } from "framer-motion"
 import Swiper from "../components/swiper/swiper"
-import { scaleAndFade } from "../components/common/animation"
+import { scaleAndFade, scrollDown } from "../components/common/animation"
+import HomeContainer from "../components/home/home-container"
 
 const Home = () => {
 	const router = useRouter()
@@ -21,16 +22,19 @@ const Home = () => {
 				<title>Brendan's Blog</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<motion.div initial="initial" animate="enter" exit="exit" variants={scaleAndFade}>
+			<motion.div initial="initial" animate="enter" exit="exit" variants={scrollDown}>
 				<Swiper size={size}></Swiper>
-				<div className="home"></div>
+				<div className="home">
+					<HomeContainer></HomeContainer>
+				</div>
 			</motion.div>
 			<style jsx>{`
 				.home {
-					height: 100vh;
-					width: 1400px;
-					background: #666;
-					margin: auto;
+					height: 85vh;
+					max-width: 1400px;
+					background: #f8f8f8;
+					border: 1px solid red;
+					margin: 30px auto;
 				}
 			`}</style>
 		</div>

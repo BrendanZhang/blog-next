@@ -3,7 +3,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { motion } from "framer-motion"
 import Swiper from "../components/swiper/swiper"
-import { scaleAndFade } from "../components/common/animation"
+import { scaleAndFade, scrollDown, scrollUp } from "../components/common/animation"
 
 const About = () => {
 	const [count, setCount] = useState(0)
@@ -15,7 +15,7 @@ const About = () => {
 	}
 	return (
 		<div>
-			<motion.div initial="initial" animate="enter" exit="exit" variants={scaleAndFade}>
+			<motion.div initial="initial" animate="enter" exit="exit" variants={scrollDown}>
 				<Swiper size={swiperSize} />
 				<div className="main">
 					这这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about这里是about里是about
