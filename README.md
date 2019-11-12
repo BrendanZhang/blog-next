@@ -1,1 +1,2 @@
-# blog-react
+# Blog-Next
+Learning react with next

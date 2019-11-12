@@ -7,7 +7,6 @@ import { motion } from "framer-motion"
 import Swiper from "../components/swiper/swiper"
 import { scaleAndFade, scrollDown, scrollUp } from "../components/common/animation"
 import HomeContainer from "../components/home/home-container"
-import dynamic from "next/dynamic"
 import scrollEvent from "../components/common/scrollEvent"
 
 const Home = () => {
