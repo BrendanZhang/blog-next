@@ -4,10 +4,12 @@ import { useRouter } from "next/router"
 import { motion } from "framer-motion"
 import Swiper from "../components/swiper/swiper"
 import { scaleAndFade, scrollDown, scrollUp } from "../components/common/animation"
+import scrollEvent from "../components/common/scrollEvent"
 
 const About = () => {
 	const [count, setCount] = useState(0)
 	const router = useRouter()
+	useEffect(() => scrollEvent(), [])
 	const { slog } = router.query
 	const swiperSize = {
 		height: 50,

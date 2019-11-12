@@ -1,14 +1,17 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Head from "next/head"
 import Pager from "../components/pager/pager"
 import { useRouter } from "next/router"
 import Router from "next/dist/next-server/server/router"
 import { motion } from "framer-motion"
 import Swiper from "../components/swiper/swiper"
-import { scaleAndFade, scrollDown } from "../components/common/animation"
+import { scaleAndFade, scrollDown, scrollUp } from "../components/common/animation"
 import HomeContainer from "../components/home/home-container"
+import dynamic from "next/dynamic"
+import scrollEvent from "../components/common/scrollEvent"
 
 const Home = () => {
+	useEffect(() => scrollEvent(), [])
 	const router = useRouter()
 	const { slog } = router.query
 	const size = {
@@ -24,9 +27,9 @@ const Home = () => {
 			</Head>
 			<motion.div initial="initial" animate="enter" exit="exit" variants={scrollDown}>
 				<Swiper size={size}></Swiper>
-				<div className="home">
+				{/* <div className="home">
 					<HomeContainer></HomeContainer>
-				</div>
+				</div> */}
 			</motion.div>
 			<style jsx>{`
 				.home {

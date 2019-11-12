@@ -29,6 +29,7 @@ const SwiperContent = (props) => {
 	}
 	Router.events.on("beforeHistoryChange", routerChangeEvent)
 	const throttle = (gapTime) => {
+		console.log("在滚动")
 		let timer = null
 		return () => {
 			if (timer) {

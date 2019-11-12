@@ -6,7 +6,6 @@ const Container = styled.main`
 	width: 25%;
 	height: 100%;
   :nth-child(odd){
-    
   }
 `
 

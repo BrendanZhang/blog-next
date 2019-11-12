@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 			<Topbar toggleDrawer={toggleDrawer}>{}</Topbar>
 			<Drawer toggleDrawer={toggleDrawer} drawerOpen={state.drawerOpen}></Drawer>
 			<div className="content-wrapper">{children}</div>
-			<AppFooter />
+			{/* <AppFooter /> */}
 			<style jsx global>{`
 				*,
 				*::before,
@@ -32,6 +32,7 @@ const Layout = ({ children }) => {
 					box-sizing: border-box;
 				}
 				body {
+					background-color: #f8f8f8;
 					width: 100vw;
 					-ms-overflow-style: -ms-autohiding-scrollbar;
 				}
